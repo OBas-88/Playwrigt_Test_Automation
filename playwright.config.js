@@ -52,9 +52,7 @@ const config = {
         screenshot: 'on',
         trace: 'on',
         viewport: null,
-        launchOptions: {
-          args: ['--start-maximized']
-        }
+        launchOptions: {}
       }
     }
   ],
