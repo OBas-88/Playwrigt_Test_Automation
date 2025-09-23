@@ -8,6 +8,7 @@ This project is a scalable, data-driven Playwright test automation framework des
 - **Cross-browser support:** Runs tests on Chromium (Chrome), Firefox, and WebKit (Safari).
 - **Allure reporting:** Generates rich, interactive test reports.
 - **Automatic video and screenshot capture:** Debug failed tests with video and screenshot evidence.
+- **Code coverage analysis:** Integrated with nyc (Istanbul) to measure and improve test coverage of your page objects.
 
 ## Project Structure
 ```
@@ -30,17 +31,25 @@ Playwrigt_Test_Automation/
    ```bash
    npx playwright test
    ```
+
 3. **Generate Allure report:**
    ```bash
    npx allure generate allure-results --clean -o allure-report
    npx allure open allure-report
    ```
 
+4. **Run code coverage analysis:**
+   ```bash
+   npm run coverage
+   ```
+   This will run your Playwright tests and generate a coverage report for your page objects. View the HTML report in the `coverage` folder.
+
 ## How It Works
 - Test scenarios are defined in `utils/testData.json`.
-- The test suite in `tests/demo2.spec.js` reads scenarios and runs them dynamically.
+- The test suite in `tests/demoApp.spec.js` reads scenarios and runs them dynamically.
 - The `ProjectBoardPage` class in `pageObjects/` centralizes all locators and actions.
 - Playwright config (`playwright.config.js`) enables cross-browser testing, video/screenshot capture, and Allure reporting.
+- Code coverage is measured for your page objects using nyc, helping you identify untested logic and improve your test suite.
 
 ## Customization
 - Add new test scenarios by editing `utils/testData.json`.
@@ -51,3 +60,4 @@ Playwrigt_Test_Automation/
 - Node.js >= 16
 - Playwright
 - Allure CLI (for report viewing)
+- nyc (Istanbul) for code coverage (already included in devDependencies)
