@@ -15,15 +15,20 @@ const { test } = require('@playwright/test');
 const { ProjectBoardPage } = require('../pageObjects/projectBoardPage');
 const dataset = require('../utils/testData.json');
 
-// Login before each test using the Page Object
-// This ensures every test starts from a logged-in state
-// Credentials are now read from each scenario in the JSON file
+let board;
+// Added beforeEach hook for test setup and login
 
-dataset.forEach(data => {
+test.beforeEach(async ({ page }, testInfo) => {
+    // Setup: create page object and login before each test
+    board = new ProjectBoardPage(page);
+    await board.goto();
+    //credentials from the current test data
+    const data = dataset[testInfo.repeatEachIndex || testInfo.workerIndex || 0];
+    await board.login(data.login.username, data.login.password);
+});
+
+dataset.forEach((data) => {
     test(`Verify "${data.card}" in "${data.app}" (${data.column})`, async ({ page }) => {
-        const board = new ProjectBoardPage(page);
-        await board.goto();
-        await board.login(data.login.username, data.login.password);
         await board.selectApp(data.app);
         const card = await board.expectCardVisible(data.column, data.card);
         for (const tag of data.tags) {
