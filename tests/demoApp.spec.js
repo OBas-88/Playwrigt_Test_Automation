@@ -16,7 +16,6 @@ const { ProjectBoardPage } = require('../pageObjects/projectBoardPage');
 const dataset = require('../utils/testData.json');
 
 let board;
-// Added beforeEach hook for test setup and login
 
 test.beforeEach(async ({ page }, testInfo) => {
     // Setup: create page object and login before each test
