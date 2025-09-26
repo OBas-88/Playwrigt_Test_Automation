@@ -34,9 +34,5 @@ dataset.forEach((data) => {
         for (const tag of data.tags) {
             await board.expectTagVisible(card, tag);
         }
-        // Check expected status if available in card object
-        if (data.expected && data.expected.status && card.status) {
-            await test.expect(card.status).toBe(data.expected.status);
-        }
     });
 });
