@@ -1,44 +1,57 @@
+
 [
   {
+    "scenario": "Test Case 1: Verify user authentication card in Web Application",
+    "login": { "username": "admin", "password": "password123" },
     "app": "Web Application",
     "column": "To Do",
     "card": "Implement user authentication",
     "tags": ["Feature", "High Priority"],
-    "login": { "username": "admin", "password": "password123" }
+    "expected": { "status": "success" }
   },
   {
+    "scenario": "Test Case 2: Verify navigation bug card in Web Application",
+    "login": { "username": "admin", "password": "password123" },
     "app": "Web Application",
     "column": "To Do",
     "card": "Fix navigation bug",
     "tags": ["Bug"],
-    "login": { "username": "admin", "password": "password123" }
+    "expected": { "status": "success" }
   },
   {
+    "scenario": "Test Case 3: Verify design system updates card in Web Application",
+    "login": { "username": "admin", "password": "password123" },
     "app": "Web Application",
     "column": "In Progress",
     "card": "Design system updates",
     "tags": ["Design"],
-    "login": { "username": "admin", "password": "password123" }
+    "expected": { "status": "in_progress" }
   },
   {
+    "scenario": "Test Case 4: Verify push notification system card in Mobile Application",
+    "login": { "username": "admin", "password": "password123" },
     "app": "Mobile Application",
     "column": "To Do",
     "card": "Push notification system",
     "tags": ["Feature"],
-    "login": { "username": "admin", "password": "password123" }
+    "expected": { "status": "success" }
   },
   {
+    "scenario": "Test Case 5: Verify offline mode card in Mobile Application",
+    "login": { "username": "admin", "password": "password123" },
     "app": "Mobile Application",
     "column": "In Progress",
     "card": "Offline mode",
     "tags": ["Feature", "High Priority"],
-    "login": { "username": "admin", "password": "password123" }
+    "expected": { "status": "in_progress" }
   },
   {
+    "scenario": "Test Case 6: Verify app icon design card in Mobile Application",
+    "login": { "username": "admin", "password": "password123" },
     "app": "Mobile Application",
     "column": "Done",
     "card": "App icon design",
     "tags": ["Design"],
-    "login": { "username": "admin", "password": "password123" }
+    "expected": { "status": "done" }
   }
 ]

@@ -1,14 +1,15 @@
-// Data-driven Playwright test suite for the Project Board Demo App
-// This test file reads test scenarios from a JSON file and runs each scenario dynamically.
-// Benefits:
-// - Easily add or update test cases by editing the JSON file (no code changes needed)
-// - Maximizes code reusability and scalability
-// - Uses a Page Object for maintainable locators and actions
+// Playwright test suite for the Project Board Demo App
+//
+// Features:
+// - Data-driven: Reads test scenarios from testData.json and runs each scenario dynamically
+// - Page Object Model: Uses ProjectBoardPage for maintainable locators and actions
+// - beforeEach hook: Initializes a new ProjectBoardPage and logs in before every test using credentials from the test data
+// - Each test: Selects the app, finds the card in the specified column, and checks all required tags
 //
 // How it works:
-// 1. The testData.json file contains an array of test scenarios (app, column, card, tags)
-// 2. The test suite logs in before each test
-// 3. For each scenario, it navigates to the correct app, finds the card in the specified column, and checks all required tags
+// 1. The testData.json file contains an array of test scenarios (app, column, card, tags, login credentials)
+// 2. The beforeEach hook creates a fresh page object and logs in with scenario-specific credentials
+// 3. Each test navigates to the correct app, finds the card, and verifies all required tags
 // 4. All locators and actions are handled by the ProjectBoardPage class
 
 const { test } = require('@playwright/test');
@@ -27,11 +28,15 @@ test.beforeEach(async ({ page }, testInfo) => {
 });
 
 dataset.forEach((data) => {
-    test(`Verify "${data.card}" in "${data.app}" (${data.column})`, async ({ page }) => {
+    test(data.scenario, async ({ page }) => {
         await board.selectApp(data.app);
         const card = await board.expectCardVisible(data.column, data.card);
         for (const tag of data.tags) {
             await board.expectTagVisible(card, tag);
+        }
+        // Check expected status if available in card object
+        if (data.expected && data.expected.status && card.status) {
+            await test.expect(card.status).toBe(data.expected.status);
         }
     });
 });
